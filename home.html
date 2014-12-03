@@ -1,0 +1,65 @@
+<html>
+	<head>
+		<title>Create new EOS from two EOSs.</title>
+		<script language="JavaScript" type="text/javascript" src="drawcanvas.js"></script>
+		<script type="text/javascript">
+			function graph(a, b, tmax){
+				cw = 400; ch =400;
+				xmin = -2; xmax = 2; ymin = -2; ymax = 2;
+
+				//canvasの設定 全体を黒くする
+				setCanvas("canvas1", "white");
+				drawLine(0, ymin, 0, ymax, "black", 1);
+				drawLine(xmin, 0, xmax, 0, "black", 1);
+
+				dt = 2 * Math.PI / 360;
+				//初期値の設定
+				t0 = 0;
+				x0 = Math.cos(a * t0);
+				y0 = Math.sin(b * t0);
+
+				for(t=dt; t<=tmax; t=t+dt){
+					x = Math.cos(a * t);
+					y = Math.sin(b * t);
+					drawLine(x0, y0, x, y, "red", 4);
+
+					x0 = x;
+					y0 = y;
+				}
+
+			}
+
+			function DOO(){
+				a = eval(document.iform.a.value);
+				b = eval(document.iform.b.value);
+				tmax = eval(document.iform.tmax.value);
+
+				graph(a, b, tmax);
+			}
+		</script>
+	</head>
+	<body>
+		<table>
+			<tbody>
+			<tr>
+				<td valign="top">
+					<form name="iform">
+						"a="
+						<input type="text" size = "3" name = "a" value = "5">
+						"b="
+						<input type="text" size = "3" name = "b" value = "6">
+						"tmax="
+						<input type="text" size = "3" name = "tmax" value = "2*Math.PI">
+						<br>
+						<input type = "button" value = "Do" onClick = "DOO()">
+					</form>
+					<br>
+				</td>
+				<td valign="top">
+					<canvas id="canvas1" width="400" height="400">
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</body>
+</html>
