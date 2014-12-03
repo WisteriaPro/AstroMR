@@ -61,5 +61,25 @@
 			</tr>
 			</tbody>
 		</table>
+		<form name="test">
+			<input type="file" id="fileload"><br>
+			<textarea name="txt" rows="10" cols="50" readonly></textarea>
+		</form>
+		<script>
+			//ファイル読み込み
+			var fileloadId = document.getElementById("fileload");
+
+			//ダイアログでファイルが選択されたとき
+			fileloadId.addEventListener("change", function(evt){
+				var file = evt.target.files;
+
+				var reader = new FileReader();
+				reader.readAsText(file[0]);
+
+				reader.onload = function(ev){
+					document.test.txt.value = reader.result;
+				}
+			},false);
+		</script>
 	</body>
 </html>
